@@ -549,6 +549,7 @@ export default {
   'Statement cannot be empty': '语句不能为空',
   'Process Define Count': '工作流定义数',
   'Process Instance Running Count': '正在运行的流程数',
+  'Task Instance Faild Count Today': '今天失败的任务数量',
   'command number of waiting for running': '待执行的命令数',
   'failure command number': '执行失败的命令数',
   'tasks number of waiting running': '待运行任务数',

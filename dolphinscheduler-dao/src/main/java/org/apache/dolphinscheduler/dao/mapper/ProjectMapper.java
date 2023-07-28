@@ -20,9 +20,11 @@ package org.apache.dolphinscheduler.dao.mapper;
 import org.apache.dolphinscheduler.dao.entity.Project;
 import org.apache.dolphinscheduler.dao.entity.ProjectUser;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -118,4 +120,12 @@ public interface ProjectMapper extends BaseMapper<Project> {
      * @return projectList
      */
     List<Project> queryAllProject();
+
+    /**
+     * count each project faild tasks
+     * @param today '2023-07-27'
+     * @return projectList
+     */
+    @MapKey("name")
+    Map<String,Project> countFaildTaskByProject(String today);
 }

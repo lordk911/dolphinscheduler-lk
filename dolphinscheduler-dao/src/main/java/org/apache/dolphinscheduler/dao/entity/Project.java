@@ -90,6 +90,9 @@ public class Project {
     @TableField(exist = false)
     private int instRunningCount;
 
+    @TableField(exist = false)
+    private int taskFaildCountToday;
+
     public long getCode() {
         return code;
     }
@@ -112,6 +115,14 @@ public class Project {
 
     public void setInstRunningCount(int instRunningCount) {
         this.instRunningCount = instRunningCount;
+    }
+
+    public int getTaskFaildCountToday() {
+        return taskFaildCountToday;
+    }
+
+    public void setTaskFaildCountToday(int taskFaildCountToday) {
+        this.taskFaildCountToday = taskFaildCountToday;
     }
 
     public int getId() {

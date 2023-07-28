@@ -36,6 +36,7 @@ import org.apache.dolphinscheduler.dao.mapper.ProjectMapper;
 import org.apache.dolphinscheduler.dao.mapper.ProjectUserMapper;
 import org.apache.dolphinscheduler.dao.mapper.UserMapper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -221,12 +222,24 @@ public class ProjectServiceImpl extends BaseServiceImpl implements ProjectServic
         int userId = loginUser.getUserType() == UserType.ADMIN_USER ? 0 : loginUser.getId();
         IPage<Project> projectIPage = projectMapper.queryProjectListPaging(page, userId, searchVal);
 
+        SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd");
+        String today = tempDate.format(new java.util.Date());
+        Map<String,Project> faildTasksCountByProject = projectMapper.countFaildTaskByProject(today);
+
         List<Project> projectList = projectIPage.getRecords();
         if (userId != 0) {
             for (Project project : projectList) {
                 project.setPerm(Constants.DEFAULT_ADMIN_PERMISSION);
             }
         }
+
+        for (Project project : projectList) {
+            Project ptemp = faildTasksCountByProject.get(project.getName());
+            if(null != ptemp){
+                project.setTaskFaildCountToday(ptemp.getTaskFaildCountToday());
+            }
+        }
+
         pageInfo.setTotal((int) projectIPage.getTotal());
         pageInfo.setTotalList(projectList);
         result.setData(pageInfo);

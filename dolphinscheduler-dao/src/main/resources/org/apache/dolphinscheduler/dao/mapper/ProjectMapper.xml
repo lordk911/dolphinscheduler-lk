@@ -149,4 +149,21 @@
     <select id="queryAllProject" resultType="org.apache.dolphinscheduler.dao.entity.Project">
         select * from t_ds_project
     </select>
+
+    <select id="countFaildTaskByProject" resultType="org.apache.dolphinscheduler.dao.entity.Project">
+        SELECT
+            COUNT(1) AS task_faild_count_today,
+            proj.name
+        FROM
+            t_ds_task_instance ti
+                LEFT JOIN
+            t_ds_process_instance pi ON ti.process_instance_id = pi.id
+                LEFT JOIN
+            t_ds_process_definition_log pd ON pi.process_definition_code=pd.code AND pi.process_definition_version=pd.version
+                LEFT JOIN
+            t_ds_project proj ON pd.project_code = proj.code
+        WHERE ti.state=6 AND ti.end_time> #{today}
+        GROUP BY
+            proj.name
+    </select>
 </mapper>
