@@ -128,4 +128,7 @@ public interface ProjectMapper extends BaseMapper<Project> {
      */
     @MapKey("name")
     Map<String,Project> countFaildTaskByProject(String today);
+
+    @MapKey("name")
+    Map<String,Project> countFaildProcessByProject(String today);
 }

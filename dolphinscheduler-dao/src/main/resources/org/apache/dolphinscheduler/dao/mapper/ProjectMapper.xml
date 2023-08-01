@@ -166,4 +166,19 @@
         GROUP BY
             proj.name
     </select>
+
+    <select id="countFaildProcessByProject" resultType="org.apache.dolphinscheduler.dao.entity.Project">
+        SELECT
+            COUNT(1) AS process_faild_count_today,
+            proj.name
+        FROM
+            t_ds_process_instance pi
+                LEFT JOIN
+            t_ds_process_definition_log pd ON pi.process_definition_code=pd.code AND pi.process_definition_version=pd.version
+                LEFT JOIN
+            t_ds_project proj ON pd.project_code = proj.code
+        WHERE pi.state=6 AND pi.end_time> #{today}
+        GROUP BY
+            proj.name
+    </select>
 </mapper>

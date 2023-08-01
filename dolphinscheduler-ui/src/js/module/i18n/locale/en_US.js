@@ -551,6 +551,7 @@ export default {
   'Process Define Count': 'Work flow Define Count',
   'Process Instance Running Count': 'Process Instance Running Count',
   'Task Instance Faild Count Today': 'Task Instance Faild Count Today',
+  'Process Instance Faild Count Now': 'Process Instance Faild Count Now',
   'command number of waiting for running': 'command number of waiting for running',
   'failure command number': 'failure command number',
   'tasks number of waiting running': 'tasks number of waiting running',

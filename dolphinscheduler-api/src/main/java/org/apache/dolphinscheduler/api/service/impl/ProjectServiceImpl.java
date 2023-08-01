@@ -224,7 +224,7 @@ public class ProjectServiceImpl extends BaseServiceImpl implements ProjectServic
 
         SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd");
         String today = tempDate.format(new java.util.Date());
-        Map<String,Project> faildTasksCountByProject = projectMapper.countFaildTaskByProject(today);
+        Map<String,Project> faildProcessCountByProject = projectMapper.countFaildProcessByProject(today);
 
         List<Project> projectList = projectIPage.getRecords();
         if (userId != 0) {
@@ -234,9 +234,9 @@ public class ProjectServiceImpl extends BaseServiceImpl implements ProjectServic
         }
 
         for (Project project : projectList) {
-            Project ptemp = faildTasksCountByProject.get(project.getName());
+            Project ptemp = faildProcessCountByProject.get(project.getName());
             if(null != ptemp){
-                project.setTaskFaildCountToday(ptemp.getTaskFaildCountToday());
+                project.setProcessFaildCountToday(ptemp.getProcessFaildCountToday());
             }
         }
 

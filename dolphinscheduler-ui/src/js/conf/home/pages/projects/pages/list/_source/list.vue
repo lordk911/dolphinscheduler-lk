@@ -32,7 +32,7 @@
         <el-table-column prop="userName" :label="$t('Owned Users')"></el-table-column>
         <el-table-column prop="defCount" :label="$t('Process Define Count')"></el-table-column>
         <el-table-column prop="instRunningCount" :label="$t('Process Instance Running Count')"></el-table-column>
-        <el-table-column prop="taskFaildCountToday" :label="$t('Task Instance Faild Count Today')"></el-table-column>
+        <el-table-column prop="processFaildCountToday" :label="$t('Process Instance Faild Count Now')"></el-table-column>
         <el-table-column :label="$t('Description')" width="200">
           <template slot-scope="scope">
             <span>{{scope.row.description | filterNull}}</span>

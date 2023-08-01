@@ -93,6 +93,9 @@ public class Project {
     @TableField(exist = false)
     private int taskFaildCountToday;
 
+    @TableField(exist = false)
+    private int processFaildCountToday;
+
     public long getCode() {
         return code;
     }
@@ -123,6 +126,14 @@ public class Project {
 
     public void setTaskFaildCountToday(int taskFaildCountToday) {
         this.taskFaildCountToday = taskFaildCountToday;
+    }
+
+    public void setProcessFaildCountToday(int processFaildCountToday) {
+        this.processFaildCountToday = processFaildCountToday;
+    }
+
+    public int getProcessFaildCountToday() {
+        return processFaildCountToday;
     }
 
     public int getId() {
