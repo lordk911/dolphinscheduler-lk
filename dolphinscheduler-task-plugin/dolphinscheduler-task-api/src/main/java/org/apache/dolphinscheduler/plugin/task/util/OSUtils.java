@@ -98,4 +98,8 @@ public class OSUtils {
     public static String getOSName() {
         return System.getProperty("os.name");
     }
+
+    public static String getKillProcessTreeScript() {
+        return PropertyUtils.getString("task.process.kill.script", null);
+    }
 }

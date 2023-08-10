@@ -226,8 +226,14 @@ public abstract class AbstractCommandExecutor {
 
         logger.info("cancel process: {}", processId);
 
-        // kill , waiting for completion
-        boolean killed = softKill(processId);
+        boolean killed = false;
+
+        killed = treeKill(processId);
+
+        if (!killed) {
+            // kill , waiting for completion
+            killed = softKill(processId);
+        }
 
         if (!killed) {
             // hard kill
@@ -238,6 +244,25 @@ public abstract class AbstractCommandExecutor {
 
             process = null;
         }
+    }
+
+    private boolean treeKill(int processId) {
+        if (null != OSUtils.getKillProcessTreeScript()) {
+            if (processId != 0 && process.isAlive()) {
+                String cmd = String.format("sh %s %d", OSUtils.getKillProcessTreeScript(), processId);
+                logger.info("tree kill task:{}, process id:{}, cmd:{}", taskRequest.getTaskAppId(), processId, cmd);
+                try {
+                    Runtime.getRuntime().exec(cmd);
+                } catch (IOException e) {
+                    logger.info("kill attempt failed", e);
+                }
+
+            }
+        }
+
+        logger.info("process status after treeKill: {}", process.isAlive());
+
+        return process.isAlive();
     }
 
     /**
@@ -260,6 +285,8 @@ public abstract class AbstractCommandExecutor {
                 logger.info("kill attempt failed", e);
             }
         }
+
+        logger.info("process status after softKill: {}", process.isAlive());
 
         return process.isAlive();
     }
