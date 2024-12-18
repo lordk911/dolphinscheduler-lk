@@ -159,7 +159,7 @@ public class DependentTaskProcessor extends BaseTaskProcessor {
                 processService.saveTaskInstance(taskInstance);
                 return true;
             default:
-                logger.error("unknown task action: {}", taskAction.toString());
+                logger.error("unknown task action: {}", taskAction);
 
         }
         return false;
@@ -169,6 +169,7 @@ public class DependentTaskProcessor extends BaseTaskProcessor {
     protected boolean killTask() {
         this.taskInstance.setState(ExecutionStatus.KILL);
         this.taskInstance.setEndTime(new Date());
+        processService.saveTaskInstance(taskInstance);
         return true;
     }
 
